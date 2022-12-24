@@ -3,11 +3,14 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 class specific:
+    
     description = "plot some data from data frame"
     def __init__(self,clabel,rlabel):
         # self.data_frame = df
         self.row_label = rlabel
-        self.colulmn_label = clabel   
+        self.colulmn_label = clabel  
+        
+        
     def read_data(self,file = "crime_rate_Spain.csv"):
         """
         Parameters
@@ -22,6 +25,8 @@ class specific:
         """
         df = pd.read_csv(file)
         return df
+    
+    
     def data_reduce(self,data,label,value):
         """
         Selecting subset of data  raws
@@ -43,6 +48,8 @@ class specific:
         
         specific_data= data[data[label] == value] 
         return  specific_data
+    
+    
     def trend_of_specific_phenomenon(self,data,label):
         """
         this function return two value the total sum 
@@ -52,6 +59,8 @@ class specific:
         first_data =specific.remove_the_dublicates(data[label]) 
         total = specific.total_case_sum(first_data,data,label)
         return  first_data,total 
+    
+    
     def remove_the_dublicates(dlist):
         """
         remove the data dublicates in list
@@ -63,6 +72,8 @@ class specific:
             if item not in new_list:
                 new_list.append(item)
         return new_list
+    
+    
     def total_case_sum(first_data,data,label,cases="Total cases"):
         """
         find the total sum for cases acording to spicefic data
@@ -98,6 +109,7 @@ class crime_per_year(specific):
         plt.plot(x_val,y_val)
         plt.show()
     
+    
 class distrbution_per_city(specific):
     def __init__(self,clabel,rlabel):
         specific.__init__(self, clabel, rlabel)
@@ -110,6 +122,7 @@ class distrbution_per_city(specific):
         ax.pie(values, radius=1, labels= label  )
         ax.set_title('distribution of different crimes in the Barcelona')
         plt.show()
+       
         
 def bar_chart(specific_crime):
     '''
